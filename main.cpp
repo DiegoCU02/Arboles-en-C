@@ -5,9 +5,10 @@ using namespace std;
 
 int main(){
 	bst arbol;
-	arbol.insert(7);
-	arbol.insert(5);
+	arbol.insert(10);
+	arbol.insert(14);
 	arbol.insert(8);
+	arbol.insert(5);
 	arbol.insert(9);
 	arbol.insert(2);
 	arbol.insert(1);
@@ -24,11 +25,13 @@ int main(){
 	cout<<endl;
 	arbol.print_decreciente(arbol.root);
 	cout<<endl;
-	tree_node *x=arbol.search(7);
+	/*tree_node *x=arbol.search(7);
 	x=arbol.predecessor(x);
 	cout<<x->key;
-	cout<<endl;
-	cout<<arbol.size();
+	*/
 	cout<<endl;
 	cout<<arbol.diametro();
+	cout<<endl;
+	cout<<arbol.perfecto();
 }
+

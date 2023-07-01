@@ -17,7 +17,7 @@ class bst{
 			root = NULL;
 		}
 		void insert(int k);
-		void print();
+		void print(); //imprime de forma bonita el bst
 		void print(std::string prefix, tree_node *x, bool isLeft);
 		void print_inorder();
 		void print_inorder(tree_node *x);
@@ -38,22 +38,21 @@ class bst{
 		void remove(tree_node *z);
 		void remove();
 		//Parte 2:
-		int size();
+		int size(); //cuenta el numero de nodos
 		int size(tree_node *x);
-		int diametro();
+		int diametro(); //encuentra la distancia maxima entre dos hojas
 		int diametro(tree_node *x);
 		int maxDepth();
 		int maxDepth(tree_node *x);
-		
 		tree_node LCA(tree_node *x, tree_node *y);
 		void caminos();
 		void caminos(tree_node *x);
-		/*
 		void espejo();
 		bool iguales(bst *x, bst *y);
 		bool esBST();
-		bool perfecto();
-		*/
+		bool perfecto(); //determina si todos los nodos excepto la raíz tienen un hermano
+		bool perfecto(tree_node *x);
+		
 };
 
 void bst::print(){
@@ -333,11 +332,32 @@ void bst::caminos(){
 }
 
 void bst::caminos(tree_node *x){
-	if(x != NULL){
-		
-	}
+	
 }
 
+
+
+bool bst::perfecto(){
+	return perfecto(root);
+}
+
+bool bst::perfecto(tree_node *x){
+	if(x == NULL){
+		return true;
+	}
+
+    if(x->left != NULL && x->right != NULL){
+		return perfecto(x->left) && perfecto(x->right);
+	}
+        
+    else if(x->left == NULL && x->right == NULL){
+		 return true;
+	}
+       
+    else{
+		 return false;
+	}
+}
 
 
 
