@@ -4,38 +4,45 @@
 using namespace std;
 
 int main(){
-	bst arbol;
-	arbol.insert(4);
-	arbol.insert(3);
-	arbol.insert(2);
-	arbol.insert(1);
-	arbol.insert(5);
-	arbol.insert(6);
-	arbol.insert(7);
-	arbol.insert(8);
-	arbol.print();
+	bst arbol1;
+	bst arbol2;
+	arbol1.insert(4);
+	arbol1.insert(3);
+	arbol1.insert(2);
+	arbol1.insert(1);
+	arbol1.insert(5);
+	arbol1.insert(6);
+	arbol1.insert(7);
+	arbol1.insert(9);
+	arbol1.print();
 	cout<<endl;
+
+	//2do arbol
+	arbol2.insert(4);
+	arbol2.insert(3);
+	arbol2.insert(2);
+	arbol2.insert(1);
+	arbol2.insert(5);
+	arbol2.insert(6);
+	arbol2.insert(7);
+	arbol2.insert(9);
+	arbol2.print();
 	
-	arbol.print_inorder(arbol.root);
-	cout<<endl;
-	arbol.print_postorder(arbol.root);
-	cout<<endl;
-	arbol.print_preorder(arbol.root);
-	cout<<endl;
-	arbol.print_decreciente(arbol.root);
+	arbol1.print_inorder(arbol1.root);
+	arbol2.print_inorder(arbol2.root);
 	cout<<endl;
 	/*tree_node *x=arbol.search(7);
 	x=arbol.predecessor(x);
 	cout<<x->key;
 	*/
 	cout<<endl;
-	cout<<arbol.diametro();
+	cout<<arbol1.diametro();
 	cout<<endl;
-	cout<<arbol.perfecto();
+	cout<<arbol1.perfecto();
 	cout<<endl;
-	tree_node *x=arbol.search(8);
-	tree_node *y=arbol.search(1);
-	tree_node *z=arbol.LCA(x,y);
-	cout<<z->key;
+	bool a;
+	a=arbol1.iguales(arbol1.root,arbol2.root);
+	cout<<a;
+	
 }
 

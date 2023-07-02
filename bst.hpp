@@ -42,16 +42,15 @@ class bst{
 		int size(tree_node *x);
 		int diametro(); //encuentra la distancia maxima entre dos hojas
 		int diametro(tree_node *x);
-		int maxDepth();
+		int maxDepth(); //devuelve el número de nodos a lo largo de la raíz hasta el nodo más lejano, un árbol vacio tiene maxDepth()=0.
 		int maxDepth(tree_node *x);
-		tree_node *LCA(tree_node *x, tree_node *y); ////devuelve el nodo más profundo que es ancestro de los nodos x e y.
-		/*
-		void caminos();
-		void caminos(tree_node *x);
+		tree_node *LCA(tree_node *x, tree_node *y); //devuelve el nodo más profundo que es ancestro de los nodos x e y.
+		
+		void caminos(); //imprimir el camino desde la raíz hacia c/u de sus hojas.
 		void espejo();
+		bool iguales(tree_node *x, tree_node *y);
 		bool iguales(bst *x, bst *y);
-		bool esBST();
-		*/
+		bool esBST(); //Para ser un árbol de búsqueda binaria: para cada nodo, todos los nodos en su sub-árbol izquierdo deben ser < que el nodo y todos los nodos del sub-árbol derecho deben ser > que el nodo.
 		bool perfecto(); //determina si todos los nodos excepto la raíz tienen un hermano
 		bool perfecto(tree_node *x);
 		
@@ -344,6 +343,25 @@ tree_node* bst::LCA(tree_node *x,tree_node *y){
     }
     return ancestro;
 } 
+
+bool bst::iguales(bst* x, bst* y){
+    return iguales(x->root, y->root);
+}
+
+bool bst::iguales(tree_node* x, tree_node* y){
+    if(x == NULL and y == NULL){
+        return 1;
+    }
+    if(x != NULL && y != NULL){
+        if(x->key == y->key){
+            bool left = iguales(x->left, y->left);
+            bool right = iguales(x->right, y->right);
+            return left and right;
+        }
+    }
+    return 0;
+}
+
 
 bool bst::perfecto(){
 	return perfecto(root);
