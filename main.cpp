@@ -5,15 +5,14 @@ using namespace std;
 
 int main(){
 	bst arbol;
-	arbol.insert(10);
-	arbol.insert(14);
-	arbol.insert(8);
-	arbol.insert(5);
-	arbol.insert(9);
+	arbol.insert(4);
+	arbol.insert(3);
 	arbol.insert(2);
 	arbol.insert(1);
+	arbol.insert(5);
 	arbol.insert(6);
-	arbol.insert(4);
+	arbol.insert(7);
+	arbol.insert(8);
 	arbol.print();
 	cout<<endl;
 	
@@ -33,5 +32,10 @@ int main(){
 	cout<<arbol.diametro();
 	cout<<endl;
 	cout<<arbol.perfecto();
+	cout<<endl;
+	tree_node *x=arbol.search(8);
+	tree_node *y=arbol.search(1);
+	tree_node *z=arbol.LCA(x,y);
+	cout<<z->key;
 }
 

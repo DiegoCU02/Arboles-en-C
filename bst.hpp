@@ -44,12 +44,14 @@ class bst{
 		int diametro(tree_node *x);
 		int maxDepth();
 		int maxDepth(tree_node *x);
-		tree_node LCA(tree_node *x, tree_node *y);
+		tree_node *LCA(tree_node *x, tree_node *y); ////devuelve el nodo más profundo que es ancestro de los nodos x e y.
+		/*
 		void caminos();
 		void caminos(tree_node *x);
 		void espejo();
 		bool iguales(bst *x, bst *y);
 		bool esBST();
+		*/
 		bool perfecto(); //determina si todos los nodos excepto la raíz tienen un hermano
 		bool perfecto(tree_node *x);
 		
@@ -327,15 +329,21 @@ int bst::maxDepth(tree_node *x){
 	}
 }
 
-void bst::caminos(){
-	caminos(root);
-}
-
-void bst::caminos(tree_node *x){
-	
-}
-
-
+tree_node* bst::LCA(tree_node *x,tree_node *y){
+	tree_node *ancestro=root;
+	 while(ancestro != NULL) {
+        if(x->key < ancestro->key && y->key < ancestro->key) {
+            ancestro = ancestro->left;
+        }
+		else if (x->key > ancestro->key && y->key > ancestro->key) {
+            ancestro = ancestro->right;
+        } 
+		else{
+            break;
+        }
+    }
+    return ancestro;
+} 
 
 bool bst::perfecto(){
 	return perfecto(root);
