@@ -22,6 +22,9 @@ int main(){
 	*/
 	arbol1.caminos();
 
+	bool a;
+	a=arbol1.esBST(arbol1.root);
+	cout<<a;
 	
 }
 

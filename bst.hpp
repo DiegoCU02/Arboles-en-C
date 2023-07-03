@@ -416,7 +416,19 @@ bool bst::esBST(){
 }
 
 bool bst::esBST(tree_node *x){
+	if(x == NULL){
+		return 1;
+	}
+	
+	if(x->left != NULL && x->left->key > x->key) {
+        return 0;
+    }
 
+    if(x->right != NULL && x->right->key < x->key) {
+        return 0;
+    }
+
+	return esBST(x->left) && esBST(x->right);
 }
 
 
