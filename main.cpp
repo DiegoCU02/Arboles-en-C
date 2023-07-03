@@ -13,6 +13,8 @@ int main(){
 	arbol1.insert(6);
 	arbol1.insert(7);
 	arbol1.insert(9);
+	arbol1.insert(13);
+	arbol1.insert(11);
 	arbol1.print();
 	cout<<endl;
 

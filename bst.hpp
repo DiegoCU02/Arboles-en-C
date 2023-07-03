@@ -451,9 +451,3 @@ bool bst::perfecto(tree_node *x){
 		 return 0;
 	}
 }
-
-
-
-
-
-
