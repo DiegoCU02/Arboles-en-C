@@ -45,9 +45,10 @@ class bst{
 		int maxDepth(); //devuelve el número de nodos a lo largo de la raíz hasta el nodo más lejano, un árbol vacio tiene maxDepth()=0.
 		int maxDepth(tree_node *x);
 		tree_node *LCA(tree_node *x, tree_node *y); //devuelve el nodo más profundo que es ancestro de los nodos x e y.
-		
 		void caminos(); //imprimir el camino desde la raíz hacia c/u de sus hojas.
-		void espejo();
+		void caminos(tree_node *x);
+		void espejo();//cambia el árbol para que los roles de los punteros left y right se intercambien en cada nodo. De tal manera que el árbol espejo en recorrido inorden muestre los elementos del mayor al menor.		
+		void espejo(tree_node *x);
 		bool iguales(tree_node *x, tree_node *y);
 		bool iguales(bst *x, bst *y);
 		bool esBST(); //Para ser un árbol de búsqueda binaria: para cada nodo, todos los nodos en su sub-árbol izquierdo deben ser < que el nodo y todos los nodos del sub-árbol derecho deben ser > que el nodo.
@@ -344,6 +345,21 @@ tree_node* bst::LCA(tree_node *x,tree_node *y){
     return ancestro;
 } 
 
+void bst::espejo(){
+	espejo(root);
+}
+
+void bst::espejo(tree_node *x){
+	if(x==NULL){
+		return;
+	}
+	tree_node* y=x->left;
+	x->left=x->right;
+	x->right=y;
+	espejo(x->left);
+	espejo(x->right);
+}
+
 bool bst::iguales(bst* x, bst* y){
     return iguales(x->root, y->root);
 }
@@ -352,7 +368,7 @@ bool bst::iguales(tree_node* x, tree_node* y){
     if(x == NULL and y == NULL){
         return 1;
     }
-    if(x != NULL && y != NULL){
+    if(x != NULL and y != NULL){
         if(x->key == y->key){
             bool left = iguales(x->left, y->left);
             bool right = iguales(x->right, y->right);

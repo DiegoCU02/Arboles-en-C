@@ -27,19 +27,20 @@ int main(){
 	arbol2.insert(7);
 	arbol2.insert(9);
 	arbol2.print();
-	
+
+	arbol1.espejo();
 	arbol1.print_inorder(arbol1.root);
+	cout<<endl;
+	arbol1.print_preorder(arbol1.root);
+	cout<<endl;
+	arbol1.print_decreciente(arbol1.root);
+	cout<<endl;
 	arbol2.print_inorder(arbol2.root);
 	cout<<endl;
 	/*tree_node *x=arbol.search(7);
 	x=arbol.predecessor(x);
 	cout<<x->key;
 	*/
-	cout<<endl;
-	cout<<arbol1.diametro();
-	cout<<endl;
-	cout<<arbol1.perfecto();
-	cout<<endl;
 	bool a;
 	a=arbol1.iguales(arbol1.root,arbol2.root);
 	cout<<a;
