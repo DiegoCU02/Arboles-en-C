@@ -46,12 +46,13 @@ class bst{
 		int maxDepth(tree_node *x);
 		tree_node *LCA(tree_node *x, tree_node *y); //devuelve el nodo más profundo que es ancestro de los nodos x e y.
 		void caminos(); //imprimir el camino desde la raíz hacia c/u de sus hojas.
-		void caminos(tree_node *x);
+		void caminos(tree_node *x,tree_node *y);
 		void espejo();//cambia el árbol para que los roles de los punteros left y right se intercambien en cada nodo. De tal manera que el árbol espejo en recorrido inorden muestre los elementos del mayor al menor.		
 		void espejo(tree_node *x);
 		bool iguales(tree_node *x, tree_node *y);
 		bool iguales(bst *x, bst *y);
 		bool esBST(); //Para ser un árbol de búsqueda binaria: para cada nodo, todos los nodos en su sub-árbol izquierdo deben ser < que el nodo y todos los nodos del sub-árbol derecho deben ser > que el nodo.
+		bool esBST(tree_node *x);
 		bool perfecto(); //determina si todos los nodos excepto la raíz tienen un hermano
 		bool perfecto(tree_node *x);
 		
@@ -332,10 +333,10 @@ int bst::maxDepth(tree_node *x){
 tree_node* bst::LCA(tree_node *x,tree_node *y){
 	tree_node *ancestro=root;
 	 while(ancestro != NULL) {
-        if(x->key < ancestro->key && y->key < ancestro->key) {
+        if(x->key<ancestro->key && y->key<ancestro->key) {
             ancestro = ancestro->left;
         }
-		else if (x->key > ancestro->key && y->key > ancestro->key) {
+		else if(x->key>ancestro->key && y->key>ancestro->key) {
             ancestro = ancestro->right;
         } 
 		else{
@@ -345,23 +346,55 @@ tree_node* bst::LCA(tree_node *x,tree_node *y){
     return ancestro;
 } 
 
+void bst::caminos(){
+	caminos(root,NULL);
+}
+
+void bst::caminos(tree_node *x, tree_node *y){
+	if(x->left != NULL){
+		caminos(x->left,y);			
+	}
+	
+	if(x->left == NULL and x->right == NULL){
+		int a = x->key;
+		y = root;
+		while(y->key!=a){
+			std::cout<<y->key<<" ";
+			if(y->key>a){
+				y=y->left;
+			}
+			else{
+				y=y->right;
+			} 
+		}
+		std::cout<<y->key<<"\n";
+	}
+
+	if(x->right!=NULL){	
+		caminos(x->right,y);	
+	} 
+	
+}
+
 void bst::espejo(){
 	espejo(root);
 }
 
 void bst::espejo(tree_node *x){
-	if(x==NULL){
+	if(x != NULL){
+		tree_node *aux = x->left;
+		x->left = x->right;
+		x->right = aux;
+		espejo(x->left);
+		espejo(x->right);
+	}
+	else{
 		return;
 	}
-	tree_node* y=x->left;
-	x->left=x->right;
-	x->right=y;
-	espejo(x->left);
-	espejo(x->right);
 }
 
 bool bst::iguales(bst* x, bst* y){
-    return iguales(x->root, y->root);
+    return iguales(x->root,y->root);
 }
 
 bool bst::iguales(tree_node* x, tree_node* y){
@@ -370,12 +403,20 @@ bool bst::iguales(tree_node* x, tree_node* y){
     }
     if(x != NULL and y != NULL){
         if(x->key == y->key){
-            bool left = iguales(x->left, y->left);
-            bool right = iguales(x->right, y->right);
+            bool left = iguales(x->left,y->left);
+            bool right = iguales(x->right,y->right);
             return left and right;
         }
     }
     return 0;
+}
+
+bool bst::esBST(){
+	return esBST(root);
+}
+
+bool bst::esBST(tree_node *x){
+
 }
 
 
@@ -385,21 +426,20 @@ bool bst::perfecto(){
 
 bool bst::perfecto(tree_node *x){
 	if(x == NULL){
-		return true;
+		return 1;
 	}
 
     if(x->left != NULL && x->right != NULL){
 		return perfecto(x->left) && perfecto(x->right);
 	}
-        
     else if(x->left == NULL && x->right == NULL){
-		 return true;
+		 return 1;
 	}
-       
     else{
-		 return false;
+		 return 0;
 	}
 }
+
 
 
 
